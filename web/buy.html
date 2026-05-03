@@ -210,11 +210,12 @@
             let payUrl = json.data.pay_url;
 
             if (isScan=='true'){
+              let scanTip = payment.includes('WXPAY') ? '请截图保存,或使用微信扫码' : payment.includes('ALIPAY') ? '请截图保存,或使用支付宝扫码' : '请截图保存,并使用对应app扫码';
               layer.open({
                 type: 1,
                 title: '扫码',
                 area: '300px',
-                content: `<div><div style="text-align: center;color: red;margin-top: 15px;">请截图保存,并使用对应app扫码</div><div id="qrcode" style="width: 256px;height: 256px;margin:15px auto"></div></div>`,
+                content: `<div><div style="text-align: center;color: red;margin-top: 15px;">${scanTip}</div><div id="qrcode" style="width: 256px;height: 256px;margin:15px auto"></div></div>`,
                 success: function(layero, index){
                   new QRCode(document.getElementById("qrcode"), payUrl);
                 }
